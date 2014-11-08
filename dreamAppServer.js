@@ -44,13 +44,9 @@ app.get('/dreams/friends/:fbID', function(req, res)
     if(error)res.status(500).send()
     console.log(user)
 
-    dreams.find({mongoUser_id:user._id},{}, function(error, results)
+    dreams.find({mongoUser_id:user._id},{}).toArray(function(error, results)
     {
-      results.toArray(function(error, doc)
-      {
-        console.log(doc)
-        res.send(doc)
-      })
+        res.send(results)
     })
   })
 })
@@ -60,14 +56,9 @@ app.get('/dreams/tags/:tag', function(req, res)
 {
   var dreams = db.collection("dream")
 
-  dreams.find({dreamTags:req.params.tag},{}, function(error, results)
+  dreams.find({dreamTags:req.params.tag},{}).toArray(function(error, results)
   {
-    if(error)res.status(500).send()
-    results.toArray(function(error, docs)
-    {
-      console.log(docs)
-      res.send(docs)
-    })
+      res.send(results)
   })
 })
 
