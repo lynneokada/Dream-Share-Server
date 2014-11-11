@@ -63,6 +63,18 @@ app.get('/dreams/friends/:fbID', function(req, res)
   })
 })
 
+//GET COMMENTS
+app.get('/comments/:dreamid', function(req, res)
+{
+  var comment = db.collection("comments")
+
+  comment.find({dream_id:req.params.dreamid},{}).toArray(function(error, results)
+  {
+    if (error)res.status(500).send()
+    res.send(results)
+  })
+})
+
 //SEARCH DREAM
 app.get('/dreams/tags/:tag', function(req, res)
 {
@@ -92,18 +104,6 @@ app.put('/dreams/:dreamid', function(req, res)
   var dreams = db.collection("dream")
 
   dream.findOne({_id:req.params.dreamid},{}, function(error, results)
-  {
-    if (error)res.status(500).send()
-    res.send(results)
-  })
-})
-
-//GET COMMENTS
-app.get('/comments/:dreamid', function(req, res)
-{
-  var comment = db.collection("comments")
-
-  comment.find({dream_id:req.params.dreamid},{}).toArray(function(error, results)
   {
     if (error)res.status(500).send()
     res.send(results)
