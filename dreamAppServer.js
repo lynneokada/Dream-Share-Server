@@ -33,6 +33,18 @@ app.post('/dreams', function(req, res)
   })
 })
 
+//POST COMMENT
+app.post('/comments', function(req, res)
+{
+  var comment = db.collection("comments")
+
+  comment.insert(req.body, {}, function(e, results){
+    if (e) res.status(500).send()
+    res.send(results)
+    console.log("commented!!")
+  })
+})
+
 //GET DREAM FROM FRIEND
 app.get('/dreams/friends/:fbID', function(req, res)
 {
@@ -58,31 +70,44 @@ app.get('/dreams/tags/:tag', function(req, res)
 
   dreams.find({dreamTags:req.params.tag},{}).toArray(function(error, results)
   {
-      res.send(results)
-  })
-})
-
-//NO
-app.post('/comments/:dreamid', function(req, res)
-{
-  var dreamDB = db.collection("comments" + req.params.dreamid)
-
-  dreamDB.insert(req.body,{},function(error,results){
-    if(e) res.status(500).send()
+    if (error)res.status(500).send()
     res.send(results)
   })
-  //console.log(JSON.stringify(req.body))
 })
 
+//DELETE DREAM
+app.delete('/dreams/:dreamid', function(req, res)
+{
+  var dreams = db.collection("dream")
+
+  req.dreams.removeById(req.params.id, function(error, result){
+    if (error)res.status(500).send()
+    res.send((result===1)?{msg:'success'}:{msg:'error'})
+  })
+})
+
+//UPDATE DREAM
+app.put('/dreams/:dreamid', function(req, res)
+{
+  var dreams = db.collection("dream")
+
+  dream.findOne({_id:req.params.dreamid},{}, function(error, results)
+  {
+    if (error)res.status(500).send()
+    res.send(results)
+  })
+})
+
+//GET COMMENTS
 app.get('/comments/:dreamid', function(req, res)
 {
-  var dreamDB = db.collection("comments" + req.params.dreamid)
+  var comment = db.collection("comments")
 
-  dreamDB.find({},{}).toArray(function(error,results){
-    if(e) res.status(500).send()
+  comment.find({dream_id:req.params.dreamid},{}).toArray(function(error, results)
+  {
+    if (error)res.status(500).send()
     res.send(results)
   })
-  console.log(JSON.stringify(req.body))
 })
 
 app.listen(3000)
