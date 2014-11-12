@@ -11,8 +11,6 @@ process.env.MONGOHQ_URL ||
 
 var db = mongoskin.db(mongoUri, {safe:true})
 
-var db = mongoskin.db('mongodb://@localhost:27017/test', {safe:true})
-
 //CREATE A NEW USER
 app.post('/user', function(req, res)
 {
