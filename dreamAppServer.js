@@ -49,6 +49,17 @@ app.post('/comments', function(req, res)
   })
 })
 
+//GET ALL DA DREAMS
+app.get('/allDreams', function(req, res){
+  var dreams = db.collection("dream")
+
+  dreams.find({},{}).toArray(function(error, res)
+  {
+    if(error)res.status(500).send()
+    res.send(res)
+  })
+})
+
 //GET DREAM FROM FRIEND
 app.get('/dreams/friends/:fbID', function(req, res)
 {
