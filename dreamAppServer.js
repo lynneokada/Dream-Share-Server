@@ -9,7 +9,7 @@ var mongoUri = process.env.MONGOLAB_URI ||
 process.env.MONGOHQ_URL ||
 'mongodb://localhost/test';
 
-var db = mongoskin.db(mongoUri, {safe:true})
+var db = mongoskin.db(process.env.MONGOHQ_URL, {safe:true})
 
 //CREATE A NEW USER
 app.post('/user', function(req, res)
