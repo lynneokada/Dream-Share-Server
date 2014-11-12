@@ -17,8 +17,9 @@ app.post('/user', function(req, res)
   var users = db.collection("user")
 
   users.insert(req.body, {}, function(e, user){
-
+console.log(e)
   if (e) res.status(500).send()
+
   res.send(user._id.toString())
 
   })
