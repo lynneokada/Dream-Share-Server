@@ -16,10 +16,10 @@ app.post('/user', function(req, res)
 {
   var users = db.collection("user")
 
-  users.insert(req.body, {}, function(e, results){
+  users.insert(req.body, {}, function(e, user){
 
   if (e) res.status(500).send()
-  res.send(req.body._id.toString())
+  res.send(user._id.toString())
 
   })
 })
