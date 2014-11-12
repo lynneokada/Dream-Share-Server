@@ -53,10 +53,10 @@ app.post('/comments', function(req, res)
 app.get('/allDreams', function(req, res){
   var dreams = db.collection("dream")
 
-  dreams.find({},{}).toArray(function(error, res)
+  dreams.find({},{}).toArray(function(error, result)
   {
     if(error)res.status(500).send()
-    res.send(res)
+    res.send(result)
   })
 })
 
