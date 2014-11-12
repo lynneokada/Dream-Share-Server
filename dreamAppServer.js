@@ -5,6 +5,12 @@ var express = require('express')
 var app = express()
 app.use(bodyParser())
 
+var mongoUri = process.env.MONGOLAB_URI ||
+process.env.MONGOHQ_URL ||
+'mongodb://localhost/test';
+
+var db = mongoskin.db(mongoUri, {safe:true})
+
 var db = mongoskin.db('mongodb://@localhost:27017/test', {safe:true})
 
 //CREATE A NEW USER
@@ -110,4 +116,5 @@ app.put('/dreams/:dreamid', function(req, res)
   })
 })
 
-app.listen(3000)
+var port = Number(process.env.PORT || 3000);
+app.listen(port, function() {});
