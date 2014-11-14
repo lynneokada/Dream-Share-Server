@@ -102,6 +102,17 @@ app.get('/dreams/tags/:tag', function(req, res)
   })
 })
 
+//SEARCH USER
+app.get('/users/:fbUserID', function(req, res){
+  var users = db.collection("user")
+
+  users.findOne({fbUser_id:req.params.fbUserID},{}, function(error, results)
+  {
+    if (error)res.status(500).send()
+      res.send(results)
+  })
+})
+
 //DELETE DREAM
 app.delete('/dreams/:dreamid', function(req, res)
 {
