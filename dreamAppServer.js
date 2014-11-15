@@ -125,6 +125,25 @@ app.delete('/dreams/delete/:dreamid', function(req, res)
   })
 })
 
+//DELETE COMMENTS
+app.delete('/comments/delete/:dreamid', function(req, res){
+  var comments = db.collection("comments")
+
+  comments.remove({dream_id:req.params.dreamid},{}, function(error){
+    console.log("removed?")
+    if(error)res.send(500).send()
+  })
+})
+
+//DELETE TAGS
+app.delete('/tags/delete/:dreamid', function(req,res){
+  var tags = db.collection("tags")
+
+  tags.remove({dream_id:req.params.dreamid},{}, function(error){
+    if(error)res.send(500).send()
+  })
+})
+
 //UPDATE DREAM
 app.put('/dreams/:dreamid', function(req, res)
 {
