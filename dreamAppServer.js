@@ -29,6 +29,7 @@ app.post('/dreams', function(req, res)
 {
   var dreams = db.collection("dream")
   req.body.mongoUser_id = new mongoskin.ObjectID(req.body.mongoUser_id)
+  req.body.dream_id = new dreams
 
   dreams.insert(req.body, {}, function(e, results)
   {
@@ -118,7 +119,7 @@ app.delete('/dreams/delete/:dreamid', function(req, res)
 {
   var dreams = db.collection("dream")
   console.log("pass")
-  dreams.remove({_id:req.params.dreamid},{}, function(error, result)
+  dreams.remove({_id:ObjectId(req.params.dreamid)},{}, function(error, result)
   {
     console.log(result)
     if (error)res.status(500).send()
