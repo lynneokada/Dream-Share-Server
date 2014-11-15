@@ -130,7 +130,7 @@ app.delete('/comments/delete/:dreamid', function(req, res){
   var comments = db.collection("comments")
 
   comments.remove({dream_id:req.params.dreamid},{}, function(error){
-    console.log("removed?")
+    console.log("comments gone?")
     if(error)res.send(500).send()
   })
 })
