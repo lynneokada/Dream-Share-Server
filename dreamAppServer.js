@@ -118,8 +118,9 @@ app.delete('/dreams/:dreamid', function(req, res)
 {
   var dreams = db.collection("dream")
 
-  req.dreams.remove({_id:req.params.id}, function(error)
+  req.dreams.remove({_id:req.params.id},{} function(error, result)
   {
+    console.log(result)
     if (error)res.status(500).send()
   })
 })
