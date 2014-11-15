@@ -114,11 +114,11 @@ app.get('/users/:fbUserID', function(req, res){
 })
 
 //DELETE DREAM
-app.delete('/dreams/:dreamid', function(req, res)
+app.delete('/dreams/delete/:dreamid', function(req, res)
 {
   var dreams = db.collection("dream")
 
-  req.dreams.remove({_id:req.params.id},{} function(error, result)
+  dreams.remove({_id:req.params.id},{} function(error, result)
   {
     console.log(result)
     if (error)res.status(500).send()
