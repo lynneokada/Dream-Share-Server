@@ -118,11 +118,9 @@ app.get('/users/:fbUserID', function(req, res){
 app.delete('/dreams/delete/:dreamid', function(req, res)
 {
   var dreams = db.collection("dream")
-
-  var query_id = Query.EQ("_id", req.params.dreamid);
-  console.log(query_id)
-
-  dreams.remove(query_id)
+  console.log("pass")
+  console.log(req.params.dreamid)
+  dreams.remove({_id:​ObjectId("5467d38e1754d502005726d5")});
 })
 
 //DELETE COMMENTS
