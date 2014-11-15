@@ -122,11 +122,7 @@ app.delete('/dreams/delete/:dreamid', function(req, res)
   var query_id = Query.EQ("_id", req.params.dreamid);
   console.log(query_id)
 
-  dreams.remove({query_id},{}, function(error, result)
-  {
-    console.log(result)
-    if (error)res.status(500).send()
-  })
+  dreams.remove(query_id)
 })
 
 //DELETE COMMENTS
