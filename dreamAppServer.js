@@ -135,15 +135,6 @@ app.delete('/comments/delete/:dreamid', function(req, res){
   })
 })
 
-//DELETE TAGS
-app.delete('/tags/delete/:dreamid', function(req,res){
-  var tags = db.collection("tags")
-
-  tags.remove({dream_id:req.params.dreamid},{}, function(error){
-    if(error)res.send(500).send()
-  })
-})
-
 //UPDATE DREAM
 app.put('/dreams/:dreamid', function(req, res)
 {
