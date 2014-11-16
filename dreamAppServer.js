@@ -1,6 +1,7 @@
 var express = require('express')
 , mongoskin = require('mongoskin')
 , bodyParser = require('body-parser')
+, mongodb = require('mongodb')
 
 var app = express()
 app.use(bodyParser())
@@ -120,7 +121,7 @@ app.delete('/dreams/delete/:dreamid', function(req, res)
   console.log("pass")
   console.log(req.params.dreamid)
 
-  dreams.remove({_id:req.params.dreamid},{}, function(error, result){
+  dreams.remove({_id:new mongodb.ObjectID(req.params.dreamid)},{}, function(error, result){
     if(error)res.send(500).send()
       console.log(result)
   })
