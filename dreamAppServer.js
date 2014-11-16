@@ -34,6 +34,8 @@ app.post('/dreams', function(req, res)
   dreams.insert(req.body, {}, function(e, results)
   {
     if (e) res.status(500).send()
+    console.log(req.body._id.toString())
+    res.send(req.body._id.toString())
     res.send(results)
   })
 })
@@ -121,7 +123,7 @@ app.delete('/dreams/delete/:dreamid', function(req, res)
   console.log("pass")
   console.log(req.params.dreamid)
 
-  dreams.remove({_id: new mongodb.ObjectId(req.params.dreamid)},{}, function(error, result){
+  dreams.remove({_id:req.params.dreamid},{}, function(error, result){
     if(error)res.send(500).send()
       console.log(result)
   })
