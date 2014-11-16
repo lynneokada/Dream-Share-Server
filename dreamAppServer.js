@@ -29,13 +29,10 @@ app.post('/dreams', function(req, res)
 {
   var dreams = db.collection("dream")
   req.body.mongoUser_id = new mongoskin.ObjectID(req.body.mongoUser_id)
-  req.body.dream_id = new dreams
 
   dreams.insert(req.body, {}, function(e, results)
   {
     if (e) res.status(500).send()
-    console.log(req.body._id.toString())
-    res.send(req.body._id.toString())
     res.send(results)
   })
 })
