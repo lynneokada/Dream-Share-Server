@@ -121,7 +121,8 @@ app.delete('/dreams/delete/:dreamid', function(req, res)
   console.log("pass")
   console.log(req.params.dreamid)
 
-  dreams.remove({_id:new mongodb.ObjectID(req.params.dreamid)},{}, function(error, result){
+  dreams.remove({_id:new mongodb.ObjectID(req.params.dreamid)},{}, function(error, result)
+  {
     if(error)res.send(500).send()
       console.log(result)
   })
@@ -138,11 +139,11 @@ app.delete('/comments/delete/:dreamid', function(req, res){
 })
 
 //UPDATE DREAM
-app.put('/dreams/:dreamid', function(req, res)
+app.put('/dreams/update/:dreamid', function(req, res)
 {
   var dreams = db.collection("dream")
 
-  dream.findOne({_id:req.params.dreamid},{}, function(error, results)
+  dream.update({_id:new mongodb.ObjectID(req.params.dreamid)},{}, function(error, results)
   {
     if (error)res.status(500).send()
     res.send(results)
